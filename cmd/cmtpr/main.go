@@ -15,7 +15,6 @@ import (
 
 func main() {
 	var (
-		repoPath    = os.Getenv("GITHUB_REPOSITORY")
 		eventName   = os.Getenv("GITHUB_EVENT_NAME")
 		eventPath   = os.Getenv("GITHUB_EVENT_PATH")
 		githubToken = os.Getenv("GITHUB_TOKEN")
@@ -29,9 +28,6 @@ func main() {
 		repo              *github.Repository
 		pullRequestNumber int
 		message           string
-		repoOwnerThenName = strings.Split(repoPath, "/")
-		repoOwner         = repoOwnerThenName[0]
-		repoName          = repoOwnerThenName[1]
 	)
 	if githubToken == "" {
 		panic(errors.New("missing env GITHUB_TOKEN"))
@@ -52,7 +48,7 @@ func main() {
 	if eventName == "pull_request" && repo != nil {
 		pullRequestNumber = event.GetNumber()
 	} else {
-		prs, _, err := client.PullRequests.List(ctx, repoOwner, repoName, nil)
+		prs, _, err := client.PullRequests.List(ctx, repo.GetOwner().GetName(), repo.GetName(), nil)
 		if err != nil {
 			panic(err)
 		}
@@ -67,7 +63,7 @@ func main() {
 		}
 	}
 	message = strings.Join(os.Args, " ")
-	comments, _, err := client.PullRequests.ListComments(ctx, repoOwner, repoName, pullRequestNumber, nil)
+	comments, _, err := client.PullRequests.ListComments(ctx, repo.GetOwner().GetName(), repo.GetName(), pullRequestNumber, nil)
 	for _, comment := range comments {
 		if comment.GetUser().GetLogin() == "github-actions[bot]" &&
 			comment.GetBody() == message {
@@ -77,8 +73,8 @@ func main() {
 	}
 	_, _, err = client.PullRequests.CreateComment(
 		ctx,
-		repoOwner,
-		repoName,
+		repo.GetOwner().GetName(),
+		repo.GetName(),
 		pullRequestNumber,
 		&github.PullRequestComment{
 			Body: &message,
