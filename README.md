@@ -8,7 +8,7 @@ A GitHub action to comment on the open PR when a commit is pushed.
 - Requires the comment's message in the `msg` parameter.
 - Supports `push` and `pull_request` event types.
 
-### Sample workflow
+### Example
 
 ```
 name: cmtpr example
