@@ -5,4 +5,4 @@ RUN go build ./cmd/cmtpr -o /bin/cmtpr
 
 FROM alpine
 COPY --from=build /bin/cmtpr /bin/cmtpr
-CMD ["cmtpr"]
+ENTRYPOINT ["cmtpr"]
