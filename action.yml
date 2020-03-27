@@ -1,0 +1,15 @@
+name: Comment on a pull request
+author: Guillaume Simonneau <simonneaug@gmail.com>
+description: write a comment on a pull request.
+branding:
+  icon: 'message-square'  
+  color: 'gray-dark'
+inputs:
+  msg: 
+    description: Comment's message
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.msg }}
