@@ -76,15 +76,21 @@ func main() {
 		}
 	}
 	relativePath := "."
+	emptyStr := ""
+	emptyInt := 0
+	var emtpyInt64 int64 = 0
 	_, _, err = client.PullRequests.CreateComment(
 		ctx,
 		ownerName,
 		repoName,
 		pullRequestNumber,
 		&github.PullRequestComment{
-			Body:     &message,
-			CommitID: &commitID,
-			Path:     &relativePath,
+			Body:      &message,
+			CommitID:  &commitID,
+			Path:      &relativePath,
+			Line:      &emptyInt,
+			Position:  &emptyInt,
+			InReplyTo: &emtpyInt64,
 		},
 	)
 	if err != nil {
