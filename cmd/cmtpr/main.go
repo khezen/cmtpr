@@ -75,21 +75,13 @@ func main() {
 			return
 		}
 	}
-	relativePath := "README.md"
-	one := 1
-	var emtpyInt64 int64
-	_, _, err = client.PullRequests.CreateComment(
+	_, _, err = client.Issues.CreateComment(
 		ctx,
 		ownerName,
 		repoName,
 		pullRequestNumber,
-		&github.PullRequestComment{
-			Body:      &message,
-			CommitID:  &commitID,
-			Path:      &relativePath,
-			Line:      &one,
-			Position:  &one,
-			InReplyTo: &emtpyInt64,
+		&github.IssueComment{
+			Body: &message,
 		},
 	)
 	if err != nil {
