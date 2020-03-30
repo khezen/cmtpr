@@ -19,7 +19,6 @@ func main() {
 		eventPath           = os.Getenv("GITHUB_EVENT_PATH")
 		githubToken         = os.Getenv("GITHUB_TOKEN")
 		ownerThenRepo       = os.Getenv("GITHUB_REPOSITORY")
-		commitID            = os.Getenv("GITHUB_SHA")
 		ownerThenReposplit  = strings.Split(ownerThenRepo, "/")
 		ownerName, repoName = ownerThenReposplit[0], ownerThenReposplit[1]
 		ctx                 = context.Background()
