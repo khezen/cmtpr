@@ -76,7 +76,6 @@ func main() {
 		}
 	}
 	relativePath := "."
-	emptyStr := ""
 	emptyInt := 0
 	var emtpyInt64 int64 = 0
 	_, _, err = client.PullRequests.CreateComment(
