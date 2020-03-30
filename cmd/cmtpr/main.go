@@ -75,9 +75,9 @@ func main() {
 			return
 		}
 	}
-	relativePath := "."
-	emptyInt := 0
-	var emtpyInt64 int64 = 0
+	relativePath := "README.md"
+	one := 1
+	var emtpyInt64 int64
 	_, _, err = client.PullRequests.CreateComment(
 		ctx,
 		ownerName,
@@ -87,8 +87,8 @@ func main() {
 			Body:      &message,
 			CommitID:  &commitID,
 			Path:      &relativePath,
-			Line:      &emptyInt,
-			Position:  &emptyInt,
+			Line:      &one,
+			Position:  &one,
 			InReplyTo: &emtpyInt64,
 		},
 	)
