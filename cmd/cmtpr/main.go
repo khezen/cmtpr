@@ -66,7 +66,7 @@ func main() {
 		}
 	}
 	message = strings.Join(os.Args, " ")
-	comments, _, err := client.PullRequests.ListComments(ctx, ownerName, repoName, pullRequestNumber, nil)
+	comments, _, err := client.Issues.ListComments(ctx, ownerName, repoName, pullRequestNumber, nil)
 	for _, comment := range comments {
 		if comment.GetUser().GetLogin() == "github-actions[bot]" &&
 			comment.GetBody() == message {
